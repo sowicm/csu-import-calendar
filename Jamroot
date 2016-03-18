@@ -1,0 +1,19 @@
+
+path-constant slib_root : "../_Supreme Libraries" ;
+project :
+    : requirements
+      <include>$(slib_root)/include
+      <include>$(slib_root)/include/core
+    : build-dir bin
+    : default-build release
+    ;
+path-constant slib_src_path : $(slib_root)/src ;
+src_list = source.cpp ;
+slib_src_list = core/SHttp.cpp core/sUrl.cpp
+                ;
+for local l in $(slib_src_list)
+{
+    src_list += $(slib_src_path)/$(l) ;
+}
+exe CSU-Import-Class-Info-to-Calendar : $(src_list) ;
+install dist : CSU-Import-Class-Info-to-Calendar : <location>. ;
